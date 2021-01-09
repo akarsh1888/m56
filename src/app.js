@@ -94,20 +94,19 @@ const App = () => {
     if (cardNo.length && ownerName.length && expDate.length && cvv.length) {
       addToFirestore("M56CardsInfo", payForm, setProgress, progress);
     } else {
-      const keys = Object.keys(payForm);
-      const a = Object.entries(payForm)
-        .map((ele, index) => ({ [ele[0]]: ele[1] }))
-        .forEach((ele, index) => {
-          if (ele[keys[index]].length === 0) {
-            setError({
-              ...error,
-              [`${keys[index]}Err`]: {
-                isCheck: true,
-                message: "* Required",
-              },
-            });
-          }
-        });
+      const obj = {};
+      const a = Object.entries(payForm).forEach((ele, index) => {
+        if (ele[1].length === 0) {
+          obj[`${ele[0]}Err`] = {
+            isCheck: true,
+            message: "* Required",
+          };
+        }
+      });
+      setError({
+        ...error,
+        ...obj,
+      });
     }
   };
   const { cardNo, ownerName, expDate, cvv } = payForm;
