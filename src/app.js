@@ -131,7 +131,7 @@ const App = () => {
                 <span className="error">{cardNoErr.message}</span>
               ) : null}
               <input
-                className={cardNoErr.isCheck ? "error" : ""}
+                className={cardNoErr.isCheck ? "error" : "cardNumber"}
                 type="number"
                 name="cardNo"
                 value={cardNo}
